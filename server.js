@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
+const routes = require('./routes');
 
 // const index = require('./routes/index');
 
@@ -17,10 +18,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const api_routes = require('./routes/api_routes/api_routes');
-const html_routes = require('./routes/html_routes/html_routes');
-app.use('/', html_routes);
-app.use('/', api_routes);
+// const api_routes = require('./routes/api_routes/api_routes');
+// const html_routes = require('./routes/html_routes/html_routes');
+// app.use('/', html_routes);
+// app.use('/', api_routes);
+
+app.use('/', routes);
 
 app.engine("handlebars", exphbs({defaultLayout: 'main'}));
 app.set("view engine", "handlebars");

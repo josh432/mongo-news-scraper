@@ -1,40 +1,35 @@
-var mongoose = require("mongoose");
-var Comment = require("./Comment.js")
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// create a schema class
-var Schema = mongoose.Schema;
-
-// create a new schema
-var ArticleSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-    body: {
-        type: String,
-    },
-    link: {
-        type: String,
-        required: true,
-        index: true,
-        unique: "That article already exists in our database"
-    },
-    source: {
-        type: String,
-        required: true,
-    },
-    dateCreated: {
-        type: Date,
-        default: Date.now
-    },
-    comments: [{ // will contain an array of comments 
-        type: Schema.Types.ObjectId, // will save the object Id of a comment 
-        ref: "Comment" // directs that the object Ids stored here are related to the Comment model
-    }]
+const ArticleSchema = new Schema({
+  title:  {
+    type: String,
+    required: true
+  },
+  body:   {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
+  },
+  source: {
+    type: String,
+    required: true
+  },
+  saved: {
+    type: Boolean,
+    default: false
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comments"
+    }
+  ]
 });
 
-// create the mondel with the schema
-var Article = mongoose.model("Article", ArticleSchema);
+const Article = mongoose.model('Article', ArticleSchema);
 
-// export the model
 module.exports = Article;
