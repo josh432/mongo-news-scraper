@@ -2,6 +2,9 @@ const express = require('express');
  const router = express.Router();
 const request = require('request'); // to easily make HTTP request
 const cheerio = require("cheerio"); // Scraping tool
+const db = require('../models');
+var mongoose = require("mongoose")
+
  
 // GET '/' Display main page
  router.get('/', (req, res) => {
@@ -22,18 +25,35 @@ router.get('/scrape', (req, res) => {
         let wiredParentSelector = "li.archive-item-component";  // The parent selector element to use
 
         $(wiredParentSelector).each( (i, element) => {
-            wiredResult.push({
-                title: $(element).find('h2.archive-item-component__title').text(),
-                body: $(element).find('p.archive-item-component__desc').text(),
-                url: $(element).find('a').attr('href')
-           });
-        });
 
+
+		            wiredResult.push({
+		                title: $(element).find('h2.archive-item-component__title').text(),
+		                body: $(element).find('p.archive-item-component__desc').text(),
+		                url: $(element).find('a').attr('href')
+
+		                
+		        })
+		    });
+
+		            for (var i = 0; i < wiredResult.length; i++) {
+		            	
+
+		            	 db.Article.create({"title": wiredResult[i].title, "body": wiredResult[i].body, "url": wiredResult[i].url}, function(err, docs) {
+		        			
+		        		});
+		            }
+		            console.log('saved DB')
+
+           
+
+       
+        
         
         res.send(wiredResult);
        
     });
-    
+   
 });
 
  module.exports = router; 

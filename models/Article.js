@@ -16,7 +16,7 @@ const ArticleSchema = new Schema({
   },
   source: {
     type: String,
-    required: true
+   // required: true
   },
   saved: {
     type: Boolean,

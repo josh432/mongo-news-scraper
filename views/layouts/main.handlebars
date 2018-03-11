@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>News Scraper</title>
-        <link rel="stylesheet" href="/css/style.css" title="main style page">
-    </head>
 
-    <body>
-        <nav>
-            <a id="logo" class="nav-link" href="/">News Scraper</a>
-            <span id="tagline">A place for news and discussion.</span>
-            <a class="nav-link nav-right" href=""> login </a>
-            <a class="nav-link nav-right" href=""> faq </a>
-            <a class="nav-link nav-right" href="/refresh" id="scrape"> Refresh News </a>
-        </nav>
+<head>
+  <meta charset="UTF-8">
+  <title>New Scraper</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <div id="container-main">
-            {{{ body }}}
-        </div>
+</head>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-+        <script src="app.js"></script>
-    </body>
-    </html>
+<body>
+    <div class="container">
+         <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Wired News Scraper</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="waves-effect waves-light btn-large" href="/">Home</a></li>
+        <li><a class="waves-effect waves-light btn-large" href="/save">Saved Articles</a></li>
+        <li><a class="waves-effect waves-light btn-large" href="/scrape">Scrape Latest News</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    {{{body}}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+ <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+ <script>
+   $(document).ready(function(){
+      
+    });
+
+ </script>
+          
+</body>
+</html>
