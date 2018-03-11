@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>News Scraper</title>
+        <link rel="stylesheet" href="/css/style.css" title="main style page">
+    </head>
+
+    <body>
+        <nav>
+            <a id="logo" class="nav-link" href="/">News Scraper</a>
+            <span id="tagline">A place for news and discussion.</span>
+            <a class="nav-link nav-right" href=""> login </a>
+            <a class="nav-link nav-right" href=""> faq </a>
+            <a class="nav-link nav-right" href="/refresh" id="scrape"> Refresh News </a>
+        </nav>
+
+        <div id="container-main">
+            {{{ body }}}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
++        <script src="app.js"></script>
+    </body>
+    </html>

@@ -1,33 +1,41 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const path = require('path');
 const bodyParser = require('body-parser');
-const exphbs  = require('express-handlebars');
-const request = require('request');
+const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
+
+// const index = require('./routes/index');
 
 const app = express();
-
-
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('public'));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
-// Mongoose connection
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// Middleware: Body-Parser
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Middleware: Express-Handlebars
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+const api_routes = require('./routes/api_routes/api_routes');
+const html_routes = require('./routes/html_routes/html_routes');
+app.use('/', html_routes);
+app.use('/', api_routes);
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.engine("handlebars", exphbs({defaultLayout: 'main'}));
+app.set("view engine", "handlebars");
 
-app.listen(PORT, () => console.log(`News Scraper listening on port ${PORT}`));
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+console.log('URI', MONGODB_URI)
+
+app.listen(PORT, function() {
+    console.log(`Listening at localhost:${PORT}`)
+})
+
+module.exports = app;
