@@ -74,9 +74,28 @@ router.get('/scrape', (req, res) => {
 
 
 // GET '/save/:id' Saves article for later viewing
-
+router.put('/save/:articleID', (req, res) => {
+    Article.findByIdAndUpdate(req.params.articleID, { $set: {saved: true} }, { new: true })
+        .then( article => {
+            res.send("Article updated");
+        })
+        .catch( err => {
+            console.error(err);
+            res.redirect('/');
+        })
+});
 
 // GET '/save' Show all saved articles
+router.get('/save', (req, res) => {
+    Article.find({ saved: true })
+        .then(dbArticles => {
+            res.render('savedArticles', { articles: dbArticles, title: "These are your saved articles" });
+        })
+        .catch( err => {
+            console.error(err);
+            res.redirect('/');
+        })
+});
 
 // POST '/save/comments/:postCommentID' Create comments for a specific article
 

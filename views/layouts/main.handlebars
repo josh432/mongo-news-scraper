@@ -61,9 +61,19 @@
 </div>
  <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
  <script>
    $(document).ready(function(){
-   
+    $(".save").on("click", function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "PUT",
+        url: "/save/" + thisId
+    }).done(function(data) {
+        window.location = "/"
+    })
+});
+    
 
     });
 
