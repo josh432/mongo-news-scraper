@@ -17,6 +17,7 @@ const Comments = require('../models/Comment');
 // GET '/scrape' Scrape news websites
 router.get('/scrape', (req, res) => {
     console.log('We are scraping my friend');
+    Article.remove({saved: false}).exec();
     // Making the request to get the HTML
     const wiredURL = "https://www.wired.com/most-recent/";
     request(wiredURL, (err, response, html) => {
@@ -37,36 +38,51 @@ router.get('/scrape', (req, res) => {
 
 
 
-		        })
+		        });
 		    });
-
-		            for (var i = 0; i < wiredResult.length; i++) {
-
-
-                         Article.create({"title": wiredResult[i].title, "body": wiredResult[i].body, "url": wiredResult[i].url})
-                         .then(function(docs) {
-                            console.log('doc', docs);
-		        		}).catch(function(err) {
-                            return res.json(err);
-                        });
-		            }
-                    console.log('saved DB');
-                    res.send("Scrape Complete");
+//This updates database but doesn't render
+		          //   for (var i = 0; i < wiredResult.length; i++) {
 
 
+            //              Article.create({"title": wiredResult[i].title, "body": wiredResult[i].body, "url": wiredResult[i].url})
+            //              .then(function(docs) {
+            //                 console.log('doc', docs);
+		        		// }).catch(function(err) {
+            //                 return res.json(err);
+            //             });
+		          //   }
+            //         console.log('saved DB');
+            //         res.send("Scrape Complete");
+
+
+//this hybrid doesn't work
+                    // Article.create({"title": wiredResult[i].title, "body": wiredResult[i].body, "url": wiredResult[i].url})
+                    //      .then( dbArticle => {
+                    //          res.render('scrape', {articles: dbArticle, title: "Check the results"});
+                    //     }).catch(function(err) {
+                    //         return res.json(err);
+                    //         res.redirect('/');
+                    //     });
+                    // }
+                    
 
 
 
 
+
+//This renders but doesn't update database
         //res.json(wiredResult);
-        // Article.create(wiredResult)
-        //     .then( dbArticle => {
-        //         res.render('scrape', {articles: dbArticle, title: "Check the results"});
-        //     })
-        //     .catch( err => {
-        //         console.error(err);
-        //         res.redirect('/');
-        //     })
+        Article.create(wiredResult)
+            .then( dbArticle => {
+                res.render('scrape', {articles: dbArticle, title: "Check the results"});
+            })
+            .catch( err => {
+                console.error(err);
+                res.redirect('/');
+            })
+
+
+
 
 
 

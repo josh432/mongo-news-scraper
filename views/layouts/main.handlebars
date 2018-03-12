@@ -63,6 +63,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
  <script>
+
+//save button event handler
    $(document).ready(function(){
     $(".save").on("click", function() {
     var thisId = $(this).attr("data-id");
@@ -73,6 +75,18 @@
         window.location = "/"
     })
 });
+
+//this isnt working, need a route for delete?
+    $(".delete").on("click", function(){
+      var thisId = $(this).attr("data-id");
+       $.ajax({
+        method: "PUT",
+        url: "/delete/article" + thisId
+    }).done(function(data) {
+        window.location = "/"
+    })
+
+    });
     
 
     });
