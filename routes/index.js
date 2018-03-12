@@ -3,12 +3,15 @@ const express = require('express');
 const request = require('request'); // to easily make HTTP request
 const cheerio = require("cheerio"); // Scraping tool
 const db = require('../models');
-var mongoose = require("mongoose")
+var mongoose = require("mongoose");
+var Article = require('../models/Article');
+const Comments = require('../models/Comment');
 
  
 // GET '/' Display main page
  router.get('/', (req, res) => {
-     res.render('index');
+     res.render('index', { mainPage: true} );
+
  });
  
 // GET '/scrape' Scrape news websites
@@ -31,6 +34,7 @@ router.get('/scrape', (req, res) => {
 		                title: $(element).find('h2.archive-item-component__title').text(),
 		                body: $(element).find('p.archive-item-component__desc').text(),
 		                url: $(element).find('a').attr('href')
+		                
 
 		                
 		        })
@@ -50,10 +54,32 @@ router.get('/scrape', (req, res) => {
        
         
         
-        res.send(wiredResult);
+        //res.json(wiredResult);
+        Article.create(wiredResult)
+            .then( dbArticle => {
+                res.render('scrape', {articles: dbArticle, title: "Check the results"});
+            })
+            .catch( err => {
+                console.error(err);
+                res.redirect('/');
+            })
+
+
+
+        
        
     });
    
 });
+
+
+// GET '/save/:id' Saves article for later viewing
+
+
+// GET '/save' Show all saved articles
+
+// POST '/save/comments/:postCommentID' Create comments for a specific article
+
+// GET '/save/comments/:getCommentID' Display comments for a specific article
 
  module.exports = router; 

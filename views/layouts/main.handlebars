@@ -22,12 +22,29 @@
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect waves-light btn-large" href="/">Home</a></li>
         <li><a class="waves-effect waves-light btn-large" href="/save">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn-large" href="/scrape">Scrape Latest News</a></li>
+        <li><a class="waves-effect waves-light btn-large" href="/scrape" id="scrape">Scrape Latest News</a></li>
       </ul>
     </div>
   </nav>
 
-    {{{body}}}
+    {{#if mainPage}}
+            <div class="main-bg"></div>
+            <div class="main-strip bg-secondary">
+            <h2>Get the latest news from
+                <em><strong>Wired</strong></em>
+            </h2>
+        </div>
+        {{else}}
+            <div class="main-bg scrape"></div>
+            <div class="main-strip bg-secondary">
+                <strong><h2>{{title}}</h2></strong>
+            </div>
+            
+        {{/if}}
+        
+    </header>
+
+        {{{body}}}
 
 
 
@@ -46,7 +63,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
  <script>
    $(document).ready(function(){
-      
+   
+
     });
 
  </script>
