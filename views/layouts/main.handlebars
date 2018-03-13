@@ -66,6 +66,9 @@
 
 //save button event handler
    $(document).ready(function(){
+    $('#modal1').modal();
+    $('.model-trigger').modal('open');
+
     $(".save").on("click", function() {
     var thisId = $(this).attr("data-id");
     $.ajax({
