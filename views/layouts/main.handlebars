@@ -80,8 +80,8 @@
     $(".delete").on("click", function(){
       var thisId = $(this).attr("id");
        $.ajax({
-        method: "PUT",
-        url: "/delete/article" + thisId
+        method: "DELETE",
+        url: "/delete/article/" + thisId
     }).done(function(data) {
         window.location = "/"
     })

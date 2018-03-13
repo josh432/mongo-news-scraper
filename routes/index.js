@@ -118,9 +118,10 @@ router.get('/save', (req, res) => {
         })
 });
 
-router.delete('/delete/article/:removeArticleID', (req, res) => {
-    Article.findByIdAndRemove(req.params.removeArticleID)
-        .then(dbArticle => {
+//not working 
+router.delete('/delete/:removeArticleID', (req, res) => {
+    Article.findByIdAndRemove(req.params.removeArticleID, { $set: {saved: false} }, { new: false })
+        .then( article => {
             res.send("Article removed");
         })
         .catch(err => console.error(err));
