@@ -78,7 +78,7 @@
 
 //this isnt working, need a route for delete?
     $(".delete").on("click", function(){
-      var thisId = $(this).attr("data-id");
+      var thisId = $(this).attr("id");
        $.ajax({
         method: "PUT",
         url: "/delete/article" + thisId

@@ -118,6 +118,14 @@ router.get('/save', (req, res) => {
         })
 });
 
+router.delete('/delete/article/:removeArticleID', (req, res) => {
+    Article.findByIdAndRemove(req.params.removeArticleID)
+        .then(dbArticle => {
+            res.send("Article removed");
+        })
+        .catch(err => console.error(err));
+})
+
 // POST '/save/comments/:postCommentID' Create comments for a specific article
 
 // GET '/save/comments/:getCommentID' Display comments for a specific article
