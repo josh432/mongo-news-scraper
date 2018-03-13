@@ -71,6 +71,7 @@ router.get('/scrape', (req, res) => {
 
 
 //This renders but doesn't update database
+//added exec() above and this fixed this...
         //res.json(wiredResult);
         Article.create(wiredResult)
             .then( dbArticle => {
