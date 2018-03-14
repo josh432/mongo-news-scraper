@@ -1,20 +1,18 @@
 <div class="container">
   <section id="main">
     {{#if articles}}
-    <h2>Wired</h2>
-    <div id="accordion">
+    <h2 class="center">Wired</h2>
+    <div class="row">
       {{#each articles}}
         <div class="card">
           <div class="card-header" id="heading{{@index}}">
             <h3 class="mb-0">
-              <button class="btn btn-link save" data-id={{this._id}} data-toggle="collapse" data-target="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
+              <button class="btn btn-link save" data-id={{this._id}}>
                 <div class="d-flex justify-content-between">
                   <div>
-                    <i class="fas fa-angle-down"></i> {{this.title}}
+                    <i class="fas fa-eye"></i> {{this.title}}
                   </div>
-                  <div class="article-options">
-                    <i class="fas fa-bookmark fa-lg"></i>
-                  </div>
+                 
                 </div>
               </button>
             </h3>

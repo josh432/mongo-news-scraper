@@ -75,7 +75,7 @@ router.get('/scrape', (req, res) => {
         //res.json(wiredResult);
         Article.create(wiredResult)
             .then( dbArticle => {
-                res.render('scrape', {articles: dbArticle, title: "Check the results"});
+                res.render('scrape', {articles: dbArticle, title: "Click on Headline Button to Save & Read"});
             })
             .catch( err => {
                 console.error(err);
@@ -119,8 +119,9 @@ router.get('/save', (req, res) => {
 });
 
 //not working 
-router.delete('/delete/:removeArticleID', (req, res) => {
-    Article.findByIdAndRemove(req.params.removeArticleID, { $set: {saved: false} }, { new: false })
+router.delete('/delete/article/:removeArticleID', (req, res) => {
+    console.log('here');
+    Article.findByIdAndRemove(req.params.removeArticleID)
         .then( article => {
             res.send("Article removed");
         })

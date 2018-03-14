@@ -1,7 +1,7 @@
 <div class="container">
     <section id="main">
       {{#if articles}}
-      <h2>Wired</h2>
+      <h2 class="center">Wired</h2>
 <div class="row">
    {{#each articles}}
         <div class="col s12 m6">
@@ -27,8 +27,17 @@
   <!-- Modal Structure -->
   <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
-      <h4>Comments</h4>
-      <p>A bunch of text</p>
+      <h4>Add a Comment</h4>
+      <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Enter a Comment</label>
+        </div>
+      </div>
+    </form>
+  </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>

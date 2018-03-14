@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>New Scraper</title>
+  <title>News Scraper</title>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -19,7 +19,7 @@
          <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">Wired News Scraper</a>
-      <ul class="right hide-on-med-and-down">
+      <ul id="navmobile" class="right hide-on-med-and-down">
         <li><a class="waves-effect waves-light btn-large" href="/">Home</a></li>
         <li><a class="waves-effect waves-light btn-large" href="/save">Saved Articles</a></li>
         <li><a class="waves-effect waves-light btn-large" href="/scrape" id="scrape">Scrape Latest News</a></li>
@@ -27,17 +27,20 @@
     </div>
   </nav>
 
+
+
+
     {{#if mainPage}}
             <div class="main-bg"></div>
             <div class="main-strip bg-secondary">
-            <h2>Get the latest news from
+            <h2 class="center">Get the latest news from
                 <em><strong>Wired</strong></em>
             </h2>
         </div>
         {{else}}
             <div class="main-bg scrape"></div>
             <div class="main-strip bg-secondary">
-                <strong><h2>{{title}}</h2></strong>
+                <strong><h2 class="center">{{title}}</h2></strong>
             </div>
             
         {{/if}}
