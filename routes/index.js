@@ -70,7 +70,7 @@ router.get('/scrape', (req, res) => {
 
 
 
-//This renders but doesn't update database
+
 //added exec() above and this fixed this...
         //res.json(wiredResult);
         Article.create(wiredResult)
@@ -118,9 +118,8 @@ router.get('/save', (req, res) => {
         })
 });
 
-//not working 
+//DELETE article from saved area 
 router.delete('/delete/article/:removeArticleID', (req, res) => {
-    console.log('here');
     Article.findByIdAndRemove(req.params.removeArticleID)
         .then( article => {
             res.send("Article removed");
@@ -129,6 +128,12 @@ router.delete('/delete/article/:removeArticleID', (req, res) => {
 })
 
 // POST '/save/comments/:postCommentID' Create comments for a specific article
+router.post('/save/comments/:postCommentID', (req, res) => {
+    Comment.create(req.body)
+        .then(dbComment => Articles.findByIdAndUpdate(req.params.postCommentID, { comments: dbComment._id }, { new: true}))
+        .then( dbArticle => res.redirect('/save'))
+        .catch( err => console.error(err));
+});
 
 // GET '/save/comments/:getCommentID' Display comments for a specific article
 

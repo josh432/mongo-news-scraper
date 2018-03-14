@@ -29,17 +29,22 @@
     <div class="modal-content">
       <h4>Add a Comment</h4>
       <div class="row">
-    <form class="col s12">
+    <form class="col s12" method="POST">
       <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea"></textarea>
           <label for="textarea1">Enter a Comment</label>
+      
         </div>
       </div>
     </form>
   </div>
     </div>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right saveComment" data-target="#previousComment{{this._id}}" data-id={{this._id}}>Submit Comment</a>
+    <h5>Previous Comments</h5>
+    <div id="previousComment"></div>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right deleteComment">Delete Comment</a>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+      
     </div>
   </div>

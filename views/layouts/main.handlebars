@@ -81,7 +81,7 @@
     })
 });
 
-//this isnt working, need a route for delete?
+//delete saved articles
     $(".delete").on("click", function(){
       var thisId = $(this).attr("id");
        $.ajax({
@@ -92,6 +92,56 @@
     })
 
     });
+
+//add comments
+  //   $(".saveComment").on("click", function(){
+  //      var thisId = $(this).attr("data-id");
+  //      if (!$("#textarea1" + thisId).val()) {
+  //       alert("please enter a note to save")
+  //   }else {
+  //     $.ajax({
+  //       method: "POST",
+  //       url: "/save/comments/" + thisId,
+  //       data: {
+  //         text: $("#textarea1" + thisId).val()
+  //       }.done(function(data) {
+  //             // Log the response
+  //             console.log(data);
+  //             // Empty the notes section
+  //             $("#textarea1" + thisId).val("");
+  //             $(".modalNote").modal("hide");
+  //             window.location = "/saved"
+  //         })
+  //     })
+  //   }
+  // });
+
+    //Handle Save Note button
+$(".saveComment").on("click", function() {
+    var thisId = $(this).attr("data-id");
+    if (!$("#textarea1" + thisId).val()) {
+        alert("please enter a note to save")
+    }else {
+      $.ajax({
+            method: "POST",
+            url: "/save/comments/" + thisId,
+            data: {
+              text: $("#textarea1" + thisId).val()
+            }
+          }).done(function(data) {
+              // Log the response
+              console.log(data);
+              // Empty the notes section
+              $("#textarea1" + thisId).val("");
+              $(".#modal1").modal("hide");
+              window.location = "/save"
+          });
+    }
+});
+
+
+
+//delete comments
     
 
     });
