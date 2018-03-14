@@ -94,6 +94,10 @@ router.get('/scrape', (req, res) => {
 });
 
 
+
+
+
+
 // GET '/save/:id' Saves article for later viewing
 router.put('/save/:articleID', (req, res) => {
     Article.findByIdAndUpdate(req.params.articleID, { $set: {saved: true} }, { new: true })
@@ -127,14 +131,70 @@ router.delete('/delete/article/:removeArticleID', (req, res) => {
         .catch(err => console.error(err));
 })
 
+// GET '/save/comments/:getCommentID' Display comments for a specific article
+// router.get('/save/comment/:getCommentID', (req, res) => {
+//     Article.findById(req.params.getCommentID)
+//         .populate("comments")
+//         .then(dbArticles => res.json(dbArticles))
+//         .catch(err => console.error(err));
+// })
+
 // POST '/save/comments/:postCommentID' Create comments for a specific article
-router.post('/save/comments/:postCommentID', (req, res) => {
-    Comment.create(req.body)
-        .then(dbComment => Articles.findByIdAndUpdate(req.params.postCommentID, { comments: dbComment._id }, { new: true}))
-        .then( dbArticle => res.redirect('/save'))
-        .catch( err => console.error(err));
+// router.post('/save/comment/:postCommentID', (req, res) => {
+//     Comment.create(req.body)
+//         .then(dbComment => Articles.findByIdAndUpdate(req.params.postCommentID, { comments: dbComment._id }, { new: true}))
+//         .then( dbArticles => res.redirect('/save'))
+//         .catch( err => console.error(err));
+// });
+
+router.get("/article/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  Article.findOne({ "_id": req.params.id })
+  // ..and populate all of the comments associated with it
+  .populate("comments")
+  // now, execute our query
+  .exec(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise, send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
 });
 
-// GET '/save/comments/:getCommentID' Display comments for a specific article
+
+
+router.post("/article/:id", function(req, res) {
+
+  // Create a new note and pass the req.body to the entry
+  var newComment = new Comment(req.body);
+  // And save the new note the db
+  newComment.save(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    } 
+    else {
+      // Use the article id to find it and then push note
+      Article.findOneAndUpdate({ "_id": req.params.id }, {$push: {"comments": comment}}, {new: true, upsert: true})
+
+      .populate('comments')
+
+      .exec(function (err, doc) {
+        if (err) {
+          console.log("Cannot find article.");
+        } else {
+          console.log("On note save we are getting notes? " + doc.comments);
+          res.send(doc);
+        }
+      });
+    }
+  });
+});
+
+
 
  module.exports = router;
