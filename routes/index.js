@@ -165,35 +165,40 @@ router.get("/article/:id", function(req, res) {
   });
 });
 
-
-
-router.post("/article/:id", function(req, res) {
-
+router.post("/comments/save/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
-  var newComment = new Comment(req.body);
+  var newComment = new Comment({
+    body: req.body.text,
+    article: req.params.id
+  });
+  console.log(req.body)
   // And save the new note the db
-  newComment.save(function(error, doc) {
+  newComment.save(function(error, note) {
     // Log any errors
     if (error) {
       console.log(error);
-    } 
+    }
+    // Otherwise
     else {
-      // Use the article id to find it and then push note
-      Article.findOneAndUpdate({ "_id": req.params.id }, {$push: {"comments": comment}}, {new: true, upsert: true})
-
-      .populate('comments')
-
-      .exec(function (err, doc) {
+      // Use the article id to find and update it's notes
+      Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "comments": comment } })
+      // Execute the above query
+      .exec(function(err) {
+        // Log any errors
         if (err) {
-          console.log("Cannot find article.");
-        } else {
-          console.log("On note save we are getting notes? " + doc.comments);
-          res.send(doc);
+          console.log(err);
+          res.send(err);
+        }
+        else {
+          // Or send the note to the browser
+          res.send(note);
         }
       });
     }
   });
 });
+
+
 
 
 

@@ -83,13 +83,13 @@
 
  <script>
 
-//save button event handler
+//start materialize JQuery
    $(document).ready(function(){
     $('#modal1').modal();
     $('.materialboxed').materialbox();
     $(".button-collapse").sideNav();
 
-
+//save button event handler
     $(".save").on("click", function() {
     var thisId = $(this).attr("data-id");
     $.ajax({
@@ -121,7 +121,7 @@ $(".saveComment").on("click", function() {
     }else {
       $.ajax({
             method: "POST",
-            url: "/article/" + thisId,
+            url: "/comments/save/" + thisId,
             data: {
               text: $("#textarea1" + thisId).val()
             }

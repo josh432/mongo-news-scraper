@@ -40,10 +40,10 @@
     </form>
   </div>
     </div>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right saveComment" data-target="#previousComment{{this._id}}" data-id={{this._id}}>Submit Comment</a>
+    <a href="/save" class="modal-action modal-close waves-effect waves-green btn-flat right saveComment" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Submit Comment</a>
     <h5>Previous Comments</h5>
-    <div id="previousComment"></div>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right deleteComment">Delete Comment</a>
+    <div id="previousComment" data-target="#previousComment{{this._id}}"></div>
+    <a href="/save" class="modal-action modal-close waves-effect waves-green btn-flat right deleteComment">Delete Comment</a>
     <div class="modal-footer">
       
     </div>
