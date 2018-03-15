@@ -11,7 +11,14 @@
 <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<style>
+.landing {
+  margin-left: 125px;
+}
+.brand-logo{
+  margin-left: 25px;
+}
+</style>
 </head>
 
 <body>
@@ -19,13 +26,22 @@
          <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">Wired News Scraper</a>
-      <ul id="navmobile" class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light btn-large" href="/">Home</a></li>
-        <li><a class="waves-effect waves-light btn-large" href="/save">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn-large" href="/scrape" id="scrape">Scrape Latest News</a></li>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="waves-effect waves-light" href="/">Home</a></li>
+        <li><a class="waves-effect waves-light" href="/save">Saved Articles</a></li>
+        <li><a class="waves-effect waves-light" href="/scrape" id="scrape">Scrape Latest News</a></li>
       </ul>
     </div>
   </nav>
+      
+      <ul class="side-nav" id="mobile-demo">
+        
+        <li><a href="/">Home</a></li>
+        <li><a href="/save">Saved Articles</a></li>
+        <li><a href="/scrape">Scrape Latest News</a></li>
+      </ul>
+  <br><br>
 
 
 
@@ -33,9 +49,9 @@
     {{#if mainPage}}
             <div class="main-bg"></div>
             <div class="main-strip bg-secondary">
-            <h2 class="center">Get the latest news from
-                <em><strong>Wired</strong></em>
-            </h2>
+            <h2 class="center">Scrape and Read the latest news from</h2>
+            <img class="img-responsive materialboxed" width="350" src="./assets/wired.jpg">
+            <img class="responsive-img landing" src="./assets/shocked-reader.jpg" width="650">
         </div>
         {{else}}
             <div class="main-bg scrape"></div>
@@ -70,6 +86,10 @@
 //save button event handler
    $(document).ready(function(){
      $('#modal1').modal();
+      $('.materialboxed').materialbox();
+  
+   $(".button-collapse").sideNav();
+
 
     $(".save").on("click", function() {
     var thisId = $(this).attr("data-id");
