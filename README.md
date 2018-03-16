@@ -8,3 +8,6 @@ Built with HTML, Javascript, JQuery, CSS, Materialize, Node.JS, Express, Handleb
 https://dry-bayou-51308.herokuapp.com/
 
 # Screen Shots
+![scrape1](https://user-images.githubusercontent.com/27470842/37533480-31543b1e-28ff-11e8-98c2-e6efc81d2734.PNG)
+![scrape2](https://user-images.githubusercontent.com/27470842/37533483-3346b6cc-28ff-11e8-9712-57adcec77daf.PNG)
+![scrape3](https://user-images.githubusercontent.com/27470842/37533489-361f2564-28ff-11e8-923e-18c0d831419d.PNG)
